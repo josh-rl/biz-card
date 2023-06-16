@@ -5,13 +5,13 @@ Created by: Joshua Lawrinenko
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:5050](http://localhost:5050) to view it in your browser.
+Runs the app in the production mode.\
+Open [http://localhost:4000](http://localhost:4000) to view it in your browser.
 
-### `npm start:dev`
+### `npm dev`
 
 Runs the app in the development mode.\
-Open [http://localhost:5050](http://localhost:5050) to view it in your browser.
+Open [http://localhost:4000](http://localhost:4000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
