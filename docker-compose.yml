@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  mongo_s:
+    image: mongo
+    container_name: mongo_c
+    restart: always
+    volumes:
+      - ./state:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+  server_s:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: server_i
+    container_name: server_c
+    command: npm run dev
+    volumes:
+      - ./server:/usr/src/server
+      # - /usr/src/server/node_modules
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongo_s
+    env_file: ./server/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+  client_s:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: client_i
+    container_name: client_c
+    command: npm run start
+    volumes:
+      - ./client:/usr/src/client
+      # - /usr/src/client/node_modules
+    depends_on:
+      - server_s
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  web-root:
+    driver: local
