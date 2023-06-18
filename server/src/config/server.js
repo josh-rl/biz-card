@@ -1,11 +1,10 @@
-import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-
-import router from "./routes.js";
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 const server = express();
+const apiRoutes = require("./routes");
 
 server.use(bodyParser.json());
 server.use(cookieParser());
@@ -23,6 +22,6 @@ else if (process.env.NODE_ENV === "development") {
 	}));
 }
 
-router(server);
+server.use('/api', apiRoutes);
 
-export default server;
+module.exports = { server };

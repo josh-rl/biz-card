@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
-import * as httpRes from "../helpers/httpResponses.js";
+const mongoose = require("mongoose");
+
+const httpRes = require("../helpers/httpResponses");
 
 class Service {
 	constructor(model) {
@@ -90,4 +91,4 @@ class Service {
 	}
 }
 
-export default Service;
+module.exports = { Service };

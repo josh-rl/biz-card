@@ -1,6 +1,7 @@
-import mongoose, { Schema } from "mongoose";
-import uniqueValidator from "mongoose-unique-validator";
-import * as bcrypt from "bcrypt";
+const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
+const bcrypt = require("bcrypt");
 const ROUNDS = 10;
 
 class User {
@@ -77,4 +78,4 @@ class User {
 	}
 }
 
-export default User;
+module.exports = { User };
