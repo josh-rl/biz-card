@@ -1,6 +1,6 @@
 **/.classpath
 **/.dockerignore
-# **/.env
+**/.env
 **/.git
 **/.github
 **/.gitignore
@@ -21,6 +21,5 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-# **/nginx.conf
 LICENSE
 readme.md
