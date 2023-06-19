@@ -2,17 +2,21 @@
 Created by: Joshua Lawrinenko
 
 ## Client
-Bootstrapped with create-react-app.
-Served through react-scripts in dev. 
-Updates docker image on the fly in dev.
+React app bootstrapped with create-react-app.\
+Served through react-scripts in dev.\
+Updates docker image on the fly in dev.\
 Served through nginx docker image in prod.
 
 ## Server
-Node, Express, and Mongoose.
+Node, Express, and Mongoose.\
 Nodemon in dev, updates docker image on the fly.
 
 ## State
-MongoDB local docker instance.
+MongoDB docker instance database storage location.
+
+## Important
+Pushes to main trigger a Github action.\
+This action deploys main to AWS EBS.
 
 ## Commands
 
