@@ -5,13 +5,13 @@ import Cookies from "universal-cookie";
  * @returns {string} Domain string based on node environment.
  */
 function getDomain() {
-	// return "http://localhost:4000/api";
-	if (process.env.NODE_ENV === "production") {
-		return process.env.REACT_APP_PROD_DOMAIN;
-	}
-	if (process.env.NODE_ENV === "development") {
-		return process.env.REACT_APP_DEV_DOMAIN;
-	}
+	return "http://localhost:4000/api";
+	// if (process.env.NODE_ENV === "production") {
+	// 	return process.env.REACT_APP_PROD_DOMAIN;
+	// }
+	// if (process.env.NODE_ENV === "development") {
+	// 	return process.env.REACT_APP_DEV_DOMAIN;
+	// }
 }
 
 /**

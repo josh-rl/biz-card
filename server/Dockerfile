@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-# ENV NODE_ENV=production
+ENV NODE_ENV=production
 WORKDIR /usr/src/server
 COPY package*.json ./
 RUN npm install --silent ./
@@ -7,4 +7,4 @@ COPY . .
 EXPOSE 4000
 # RUN chown -R node /usr/src/server
 # USER node
-CMD ["npm", "run", "start"]
+# CMD ["npm", "run", "start"]

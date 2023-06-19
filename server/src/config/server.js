@@ -11,7 +11,7 @@ server.use(cookieParser());
 
 if (process.env.NODE_ENV === "production") {
 	server.use(cors({
-		origin: ["https://joshrlaw.dev"],
+		origin: ["https://joshrlaw.dev", "*"],
 		credentials: true
 	}));
 }

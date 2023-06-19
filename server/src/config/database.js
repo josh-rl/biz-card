@@ -2,7 +2,13 @@ const mongoose = require("mongoose");
 
 class Connection {
 	constructor() {
-		let url = process.env.MONGODB_URI || "";
+		let url = "";
+		if (process.env.NODE_ENV === "production") {
+			url = process.env.MONGODB_PROD_URI;
+		}
+		else if (process.env.NODE_ENV === "development") {
+			url = process.env.MONGODB_DEV_URI;
+		}
 		// if (url !== "") {
 		// 	url = (url.replace(
 		// 		"<username>",
