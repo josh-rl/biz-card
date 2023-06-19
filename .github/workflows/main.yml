@@ -1,0 +1,39 @@
+name: Deploy Github to AWS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@main
+      
+      - name: Generate Deployment Package
+        run: zip -r deploy.zip * -x "**node_modules**"
+      
+      - name: Get Timestamp
+        uses: gerred/actions/current-time@main
+        id: current-time
+      
+      - name: Format Timestamp
+        uses: frabert/replace-string-action@main
+        id: format-time
+        with:
+          pattern: '[:\.]+'
+          string: "${{ steps.current-time.outputs.time }}"
+          replace-with: '-'
+          flags: 'g'
+      
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: biz-card
+          environment_name: biz-card-env
+          version_label: "biz-card-deployment-${{ steps.format-time.outputs.replaced }}"
+          region: us-east-2
+          deployment_package: deploy.zip
+    
