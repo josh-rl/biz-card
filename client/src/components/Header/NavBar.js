@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
 
 import { logout } from "../../services/authService";
 
@@ -84,21 +85,21 @@ const NavBar = ({ userData, setUserData, signedIn, setSignedIn, screenName, setS
 					<li hidden={true}>
 						<Link className="app-nav-btn" to={"/admin"}><i className="fas fa-tools"></i>Admin</Link>
 					</li>
-					<li className="dropdown">
-						<Link className="dropdown-toggle app-nav-btn" data-toggle="dropdown" role="button">
+					<Dropdown as="li" className="" drop="down-centered">
+						<Dropdown.Toggle as="button" className="app-nav-btn">
 							<i className="fas fa-user"></i>
 							User
-						</Link>
-						<div className="dropdown-menu dropdown-menu-left">
-							<span className="dropdown-item-text text-center" hidden={!signedIn}>Logged in as: {screenName}</span>
-							<div className="dropdown-divider" hidden={!signedIn}> </div> 
-							<div className="dropdown-item text-center" hidden={signedIn} onClick={showSignInOC}>Log in</div>
-							<div className="dropdown-item text-center" hidden={signedIn} onClick={showRegisterOC}>Sign up</div>
-							<div className="dropdown-item text-center" hidden={!signedIn} onClick={handleLogout}>Logout</div>
-							<div className="dropdown-divider"></div>
-							<div className="dropdown-item text-center">Settings</div>
-						</div>
-					</li>
+						</Dropdown.Toggle>
+						<Dropdown.Menu>
+							<Dropdown.Item className="" hidden={!signedIn}>Logged in as: {screenName}</Dropdown.Item>
+							<Dropdown.Divider className="" hidden={!signedIn} />
+							<Dropdown.Item className="" hidden={signedIn} onClick={showSignInOC}>Log in</Dropdown.Item>
+							<Dropdown.Item className="" hidden={signedIn} onClick={showRegisterOC}>Sign up</Dropdown.Item>
+							<Dropdown.Item className="" hidden={!signedIn} onClick={handleLogout}>Logout</Dropdown.Item>
+							<Dropdown.Divider />
+							<Dropdown.Item className="" >Settings</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
 				</ul>
 			</nav>
 

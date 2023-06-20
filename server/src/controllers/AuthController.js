@@ -1,7 +1,7 @@
-import Controller from "./Controller.js";
-import AuthService from "../services/AuthService.js";
-import User from "../models/User.js";
-import Auth from "../models/Auth.js";
+const { Controller } = require("./Controller");
+const { AuthService } = require("../services/AuthService");
+const { User } = require("../models/User");
+const { Auth } = require("../models/Auth");
 
 const authService = new AuthService(
 	new Auth().getInstance(),
@@ -87,9 +87,10 @@ class AuthController extends Controller {
 
 	async register(req, res, next) {
 		try {
-			const response = await this.service.register(req.body);
-			// TODO:
-			// create short exp 'recently registered' cookie
+			// TODO: use resiter from authService when fixed
+			// const response = await this.service.register(req.body);
+			const response = await this.userController.service.insert(req.body);
+			// TODO: create short exp 'recently registered' cookie
 			await res.status(response.statusCode).json(response);
 			// next();
 		} catch (error) {
@@ -167,4 +168,4 @@ class AuthController extends Controller {
 	}
 }
 
-export default new AuthController(authService);
+module.exports = new AuthController(authService);

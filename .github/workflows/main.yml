@@ -31,8 +31,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: biz-card
-          environment_name: biz-card-env
+          application_name: aws-fullstack-docker-app
+          environment_name: aws-fullstack-docker-app-env
           version_label: "biz-card-deployment-${{ steps.format-time.outputs.replaced }}"
           region: us-east-2
           deployment_package: deploy.zip

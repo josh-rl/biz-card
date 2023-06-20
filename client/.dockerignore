@@ -2,6 +2,7 @@
 **/.dockerignore
 # **/.env
 **/.git
+**/.github
 **/.gitignore
 **/.project
 **/.settings
@@ -20,5 +21,6 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+# **/nginx.conf
 LICENSE
-README.md
+readme.md

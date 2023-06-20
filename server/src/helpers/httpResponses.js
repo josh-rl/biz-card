@@ -1,4 +1,4 @@
-export function findSuccess(item) {
+module.exports.findSuccess = (item) => {
 	return {
 		success: true,
 		statusCode: 200,
@@ -7,7 +7,7 @@ export function findSuccess(item) {
 	};
 }
 
-export function findManySuccess(data, count) {
+module.exports.findManySuccess = (data, count) => {
 	return {
 		success: true,
 		statusCode: 200,
@@ -17,7 +17,7 @@ export function findManySuccess(data, count) {
 	};
 }
 
-export function createSuccess(item) {
+module.exports.createSuccess = (item) => {
 	return {
 		success: true,
 		statusCode: 201,
@@ -26,7 +26,7 @@ export function createSuccess(item) {
 	};
 }
 
-export function updateSuccess(item) {
+module.exports.updateSuccess = (item) => {
 	return {
 		success: true,
 		statusCode: 201,
@@ -35,7 +35,7 @@ export function updateSuccess(item) {
 	};
 }
 
-export function deleteSuccess(item) {
+module.exports.deleteSuccess = (item) => {
 	return {
 		success: true,
 		deleted: true,
@@ -45,7 +45,7 @@ export function deleteSuccess(item) {
 	};
 }
 
-export function authenticationSuccess() {
+module.exports.authenticationSuccess = () => {
 	return {
 		success: true,
 		statusCode: 202,
@@ -53,7 +53,7 @@ export function authenticationSuccess() {
 	};
 }
 
-export function authenticationDenied(msg) {
+module.exports.authenticationDenied = (msg) => {
 	return {
 		success: false,
 		statusCode: 403,
@@ -61,7 +61,7 @@ export function authenticationDenied(msg) {
 	};
 }
 
-export function emailNotFound() {
+module.exports.emailNotFound = () => {
 	return {
 		success: false,
 		statusCode: 470,
@@ -69,7 +69,7 @@ export function emailNotFound() {
 	};
 }
 
-export function emailNotUnique() {
+module.exports.emailNotUnique = () => {
 	return {
 		success: false,
 		statusCode: 471,
@@ -77,7 +77,7 @@ export function emailNotUnique() {
 	};
 }
 
-export function passwordMismatch() {
+module.exports.passwordMismatch = () => {
 	return {
 		success: false,
 		statusCode: 472,
@@ -85,7 +85,7 @@ export function passwordMismatch() {
 	};
 }
 
-export function idNotFound() {
+module.exports.idNotFound = () => {
 	return {
 		success: false,
 		statusCode: 473,
@@ -93,7 +93,7 @@ export function idNotFound() {
 	};
 }
 
-export function tokenNotFound() {
+module.exports.tokenNotFound = () => {
 	return {
 		success: false,
 		statusCode: 474,
@@ -101,7 +101,7 @@ export function tokenNotFound() {
 	};
 }
 
-export function tokenExpired() {
+module.exports.tokenExpired = () => {
 	return {
 		success: false,
 		statusCode: 475,
@@ -109,7 +109,7 @@ export function tokenExpired() {
 	};
 }
 
-export function serverError(error) {
+module.exports.serverError = (error) => {
 	return {
 		success: false,
 		statusCode: 500,
@@ -118,7 +118,7 @@ export function serverError(error) {
 	};
 }
 
-export function createFailure(item) {
+module.exports.createFailure = (item) => {
 	return {
 		success: false,
 		statusCode: 500,
@@ -127,7 +127,7 @@ export function createFailure(item) {
 	};
 }
 
-export function updateFailure(id, item) {
+module.exports.updateFailure = (id, item) => {
 	return {
 		success: false,
 		statusCode: 500,
@@ -137,7 +137,7 @@ export function updateFailure(id, item) {
 	};
 }
 
-export function serverFailure(msg) {
+module.exports.serverFailure = (msg) => {
 	return {
 		success: false,
 		statusCode: 500,

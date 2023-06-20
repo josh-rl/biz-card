@@ -1,8 +1,14 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 class Connection {
 	constructor() {
-		let url = process.env.MONGODB_URI || "";
+		let url = "";
+		if (process.env.NODE_ENV === "production") {
+			url = process.env.MONGODB_PROD_URI;
+		}
+		else if (process.env.NODE_ENV === "development") {
+			url = process.env.MONGODB_DEV_URI;
+		}
 		// if (url !== "") {
 		// 	url = (url.replace(
 		// 		"<username>",
@@ -12,18 +18,16 @@ class Connection {
 		// 		process.env.DB_PASS
 		// 	);
 		// }
-		let options = {
+		mongoose.Promise = global.Promise;
+		mongoose.connect(url, {
 			dbName: process.env.DB_NAME,
 			useNewUrlParser: true,
 			useUnifiedTopology: true
-		};
-		mongoose.Promise = global.Promise;
-		// mongoose.set("useNewUrlParser", true);
-		// mongoose.set("useFindAndModify", false);
-		// mongoose.set("useCreateIndex", true);
-		// mongoose.set("useUnifiedTopology", true);
-		mongoose.connect(url, options);
+		}).then(
+			() => {console.log("Connected to database at URL:", url);},
+			() => {console.log("Could not connect to database at URL:", url);}
+		);
 	}
 }
 
-export default new Connection();
+module.exports = new Connection();

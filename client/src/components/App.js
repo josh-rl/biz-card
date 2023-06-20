@@ -12,7 +12,6 @@ import "bootstrap/dist/css/bootstrap.css";
 // import "../styles/style.css";
 import "../styles/main.css";
 
-
 const App = () => {
 	const [userData, setUserData] = useState({
 		_id: "",

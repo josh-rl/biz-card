@@ -1,9 +1,8 @@
-import mongoose from "mongoose";
-import Service from "./Service.js";
-// import * as jwt from "jsonwebtoken";
-// import { sign, verify, decode } from "jsonwebtoken";
-import jwt from "jsonwebtoken";
-import * as httpRes from "../helpers/httpResponses.js";
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
+const { Service } = require("./Service");
+const httpRes = require("../helpers/httpResponses");
 
 class AuthService extends Service {
 	constructor(authModel, userModel) {
@@ -86,6 +85,7 @@ class AuthService extends Service {
 		}
 	}
 
+	// BROKEN - does not check for success, ex: non-unique email
 	async register(data) {
 		try {
 			const newUser = await this.userService.insert(data);
@@ -232,4 +232,4 @@ class AuthService extends Service {
 	}
 }
 
-export default AuthService;
+module.exports = { AuthService };
