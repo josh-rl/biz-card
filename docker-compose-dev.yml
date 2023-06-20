@@ -1,5 +1,5 @@
 version: "3.8"
-
+name: biz-card-dev
 services:
   mongo_dev_s:
     image: mongo
