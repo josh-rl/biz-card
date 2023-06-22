@@ -2,7 +2,7 @@ name: Deploy Github to AWS
 on:
   push:
     branches:
-      - main
+      - elasticbean
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,7 +26,7 @@ jobs:
           replace-with: '-'
           flags: 'g'
       
-      - name: Deploy to EB
+      - name: Deploy to ElasticBeanstalk
         uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -36,4 +36,3 @@ jobs:
           version_label: "biz-card-deployment-${{ steps.format-time.outputs.replaced }}"
           region: us-east-2
           deployment_package: deploy.zip
-    
