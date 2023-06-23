@@ -1,46 +1,28 @@
 version: "3.8"
 name: biz-card-prod
 services:
-  mongo_prod_s:
-    image: mongo
-    container_name: mongo_prod_c
-    restart: always
-    volumes:
-      - ./state:/data/db
-    ports:
-      - "27017:27017"
-    networks:
-      - app-network
   server_prod_s:
     build:
       context: ./server
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     image: server_prod_i
     container_name: server_prod_c
     command: npm run start
-    volumes:
-      - ./server:/usr/src/server
-      - /usr/src/server/node_modules
     ports:
       - "4000:4000"
-    depends_on:
-      - mongo_prod_s
     env_file: ./server/.env
     networks:
       - app-network
   client_prod_s:
     build:
       context: ./client
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     image: client_prod_i
     container_name: client_prod_c
-    volumes:
-      - ./client:/usr/src/client
-      - /usr/src/client/node_modules
     depends_on:
       - server_prod_s
     ports:
-      - "3000:80"
+      - "80:80"
     env_file: ./client/.env
     networks:
       - app-network
