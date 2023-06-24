@@ -45,16 +45,16 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    # Server upload to ECR
-    - name: Build, tag, and push backend image to Amazon ECR
-      id: build-backend
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        # IMAGE_TAG: ${{ github.sha }}
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:server_latest ./client/Dockerfile.prod
-        docker push $ECR_REGISTRY/$ECR_FE_REPO:server_latest
-        echo "client_i=$ECR_REGISTRY/$ECR_REPOSITORY:server_latest" >> $GITHUB_OUTPUT
+    # # Server upload to ECR
+    # - name: Build, tag, and push backend image to Amazon ECR
+    #   id: build-backend
+    #   env:
+    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+    #     # IMAGE_TAG: ${{ github.sha }}
+    #   run: |
+    #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:server_latest ./server
+    #     docker push $ECR_REGISTRY/$ECR_FE_REPO:server_latest
+    #     echo "client_i=$ECR_REGISTRY/$ECR_REPOSITORY:server_latest" >> $GITHUB_OUTPUT
     
     # Client upload to ECR
     - name: Build, tag, and push frontend image to Amazon ECR
@@ -62,7 +62,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:client_latest ./client/Dockerfile.prod
+        docker build -f ./client/Dockerfile.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:client_latest ./client
         docker push $ECR_REGISTRY/$ECR_FE_REPO:client_latest
         echo "client_i=$ECR_REGISTRY/$ECR_REPOSITORY:client_latest" >> $GITHUB_OUTPUT
 
@@ -115,13 +115,13 @@ jobs:
       with:
         task-definition: ${{ env.ECS_TASK_DEFINITION }}
         container-name: ${{ env.ECR_CLIENT_CONTAINER }}
-        image: ${{ steps.build-image.outputs.client_i }}
+        image: ${{ steps.build-frontend.outputs.client_i }}
 
     # Deploy final task definition to ECS
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ${{ steps.task-def-update.outputs.task-definition }}
+        task-definition: ${{ steps.task-def-create.outputs.task-definition }}
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
