@@ -12,7 +12,9 @@ Node, Express, and Mongoose.\
 Nodemon in dev, updates docker image on the fly.
 
 ## State
-MongoDB docker instance database storage location.
+MongoDB docker instance database storage location.\
+Optional folder when running in Atlas mode.\
+Required for running in Local mode (see Dockerfiles).
 
 ## Important
 Pushes to main trigger a Github action.\
