@@ -53,7 +53,7 @@ jobs:
     #     # IMAGE_TAG: ${{ github.sha }}
     #   run: |
     #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:server_latest ./server
-    #     docker push $ECR_REGISTRY/$ECR_FE_REPO:server_latest
+    #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:server_latest
     #     echo "client_i=$ECR_REGISTRY/$ECR_REPOSITORY:server_latest" >> $GITHUB_OUTPUT
     
     # Client upload to ECR
@@ -63,7 +63,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
         docker build -f ./client/Dockerfile.prod -t $ECR_REGISTRY/$ECR_REPOSITORY:client_latest ./client
-        docker push $ECR_REGISTRY/$ECR_FE_REPO:client_latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:client_latest
         echo "client_i=$ECR_REGISTRY/$ECR_REPOSITORY:client_latest" >> $GITHUB_OUTPUT
 
     # Compose and upload to ECR
