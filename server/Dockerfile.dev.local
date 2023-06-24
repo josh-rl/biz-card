@@ -1,5 +1,6 @@
 FROM node:lts-alpine
 ENV NODE_ENV=development
+ENV MONGO_MODE=local
 WORKDIR /usr/src/server
 COPY package*.json ./
 RUN npm install --silent ./

@@ -1,20 +1,10 @@
 version: "3.8"
 name: biz-card-dev
 services:
-  mongo_dev_s:
-    image: mongo
-    container_name: mongo_dev_c
-    restart: always
-    volumes:
-      - ./state:/data/db
-    ports:
-      - "27017:27017"
-    networks:
-      - app-network
   server_dev_s:
     build:
       context: ./server
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.dev.atlas
     image: server_dev_i
     container_name: server_dev_c
     command: npm run dev
@@ -23,8 +13,6 @@ services:
       - /usr/src/server/node_modules
     ports:
       - "4000:4000"
-    depends_on:
-      - mongo_dev_s
     env_file: ./server/.env
     networks:
       - app-network

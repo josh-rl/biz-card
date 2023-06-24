@@ -1,0 +1,36 @@
+version: "3.8"
+name: biz-card-prod
+services:
+  server_prod_s:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.prod
+    image: server_prod_i
+    container_name: server_prod_c
+    command: npm run start
+    ports:
+      - "4000:4000"
+    env_file: ./server/.env
+    networks:
+      - app-network
+  client_prod_s:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    image: client_prod_i
+    container_name: client_prod_c
+    depends_on:
+      - server_prod_s
+    ports:
+      - "80:80"
+    env_file: ./client/.env
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  web-root:
+    driver: local

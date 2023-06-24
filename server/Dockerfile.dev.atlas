@@ -1,0 +1,11 @@
+FROM node:lts-alpine
+ENV NODE_ENV=development
+ENV MONGO_MODE=atlas
+WORKDIR /usr/src/server
+COPY package*.json ./
+RUN npm install --silent ./
+COPY . .
+EXPOSE 4000
+# RUN chown -R node /usr/src/server
+# USER node
+# CMD ["npm", "run", "dev"]
