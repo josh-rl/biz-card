@@ -2,12 +2,11 @@ name: Deploy Github to AWS ECS
 
 on:
   push:
-    branches: [ "ecs" ]
+    branches:
+      - main
 
 env:
   AWS_REGION: us-east-2
-  # ECR_BE_REPO: ecr-express-docker-repo
-  # ECR_FE_REPO: ecr-react-docker-repo
   ECR_REPOSITORY: ecr-docker-repo
   ECS_SERVICE: test-docker-service
   ECS_CLUSTER: test-docker-cluster
