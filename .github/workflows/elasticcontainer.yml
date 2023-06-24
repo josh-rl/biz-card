@@ -105,7 +105,7 @@ jobs:
         CLIENT_IMAGE: ${{ env.ECR_CLIENT_IMAGE }}
         CLIENT_CONTAINER: ${{ env.ECR_CLIENT_CONTAINER }}
       run: |
-        docker compose -f compose.prod.aws.yml build
+        docker compose -f compose.prod.aws.yml create
         docker tag $SERVER_IMAGE:latest $ECR_REGISTRY/$ECR_REPOSITORY:server_latest
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:server_latest
         echo "server_i=$ECR_REGISTRY/$ECR_REPOSITORY:server_latest" >> $GITHUB_OUTPUT
