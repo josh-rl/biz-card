@@ -2,7 +2,7 @@ name: Deploy Github to AWS ElasticBeanstalk
 on:
   push:
     branches:
-      - elasticbean
+      - ebs
 jobs:
   deploy:
     runs-on: ubuntu-latest

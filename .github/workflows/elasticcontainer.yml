@@ -3,7 +3,7 @@ name: Deploy Github to AWS ECS
 on:
   push:
     branches:
-      - main
+      - ecs
 
 env:
   AWS_REGION: us-east-2
