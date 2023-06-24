@@ -35,7 +35,7 @@ env:
   ECR_BE_REPO: ecr-express-docker-repo
   ECR_FE_REPO: ecr-react-docker-repo
   ECR_REPOSITORY: ecr-docker-repo
-  ECS_SERVICE: test_deploy_service
+  ECS_SERVICE: test-deploy-service
   ECS_CLUSTER: test-cluster-docker
   ECS_TASK_DEFINITION: .aws/task-definition.json
   ECS_TASK_TEMLPATE: .aws/task-definition-template.json
