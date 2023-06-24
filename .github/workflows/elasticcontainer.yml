@@ -100,8 +100,6 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        SERVER_CONTAINER: ${{ env.ECR_SERVER_CONTAINER }}
-        CLIENT_CONTAINER: ${{ env.ECR_CLIENT_CONTAINER }}
         SERVER_IMAGE: ${{ env.ECR_SERVER_IMAGE }}
         CLIENT_IMAGE: ${{ env.ECR_CLIENT_IMAGE }}
       run: |
@@ -116,19 +114,23 @@ jobs:
     # Create task-defition based on service container
     - name: Render AWS ECS task definition for server container
       id: task-def-create
+      env:
+        SERVER_C: ${{ env.ECR_SERVER_CONTAINER }}
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: ${{ env.ECS_TASK_DEFINITION }}
-        container-name: ${{ env.SERVER_CONTAINER }}
+        container-name: $SERVER_C
         image: ${{ steps.build-image.outputs.server_i }}
 
     # Update task-defition based on client container
     - name: Render AWS ECS task definition for client container
       id: task-def-update
+      env:
+        CLIENT_C: ${{ env.ECR_CLIENT_CONTAINER }}
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: ${{ steps.task-def-create.outputs.task-definition }}
-        container-name: ${{ env.CLIENT_CONTAINER }}
+        container-name: $CLIENT_C
         image: ${{ steps.build-image.outputs.client_i }}
 
     # Deploy final task definition to ECS
